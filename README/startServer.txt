@@ -1,0 +1,63 @@
+## Start Your Memories Server
+
+Once you have completed the setup and configured your environment files, follow these steps to build and start Memories.
+
+### Step 1: Open the Main Project Directory
+
+Open a terminal or PowerShell window in the root `MEDIA_SERVER` directory, where your `docker-compose.yml` file is located.
+
+If you are already in that directory, continue to the next step.
+
+### Step 2: Build and Start the Server
+
+Run the following command:
+
+```bash
+docker compose up --build -d
+```
+
+This command builds the application images if necessary and starts the required services in the background.
+
+**Note:** The first startup may take several minutes because Docker needs to download images, install dependencies, and build the application.
+
+### Step 3: Verify That the Server Is Running
+
+Run:
+
+```bash
+docker compose ps
+```
+
+Check that the required services have started successfully.
+
+If a service fails to start, inspect the logs using:
+
+```bash
+docker compose logs --tail=100
+```
+
+### Step 4: Access Memories
+
+Open your web browser and visit:
+
+```text
+http://localhost
+```
+
+If you have configured a different port or domain in your Docker Compose configuration, use the corresponding address instead.
+
+### Starting Memories Again Later
+
+After the initial setup, you do not need to repeat the environment configuration every time you use the server.
+
+1. Start Docker Engine on Linux or open Docker Desktop on Windows.
+2. Open a terminal in the main `MEDIA_SERVER` directory.
+3. Run:
+
+```bash
+docker compose up -d
+```
+
+Your existing containers will start in the background.
+
+**Important:** Keep Docker running while using Memories. Your media files and application data should remain available according to your configured storage and database persistence settings.
