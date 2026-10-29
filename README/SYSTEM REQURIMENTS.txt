@@ -1,0 +1,60 @@
+
+# Memories Server — System Requirements
+
+Before installing the Memories Server, make sure your computer meets the minimum hardware and software requirements listed below.
+
+These requirements are intended to run the Memories application, Docker containers, database, media processing services, and local AI image-tagging system comfortably.
+
+## Minimum Hardware Requirements
+
+| Component | Minimum Requirement |
+|---|---|
+| **Processor (CPU)** | Intel Core i7, 4th Generation or newer |
+| **CPU Cores** | Minimum 4 physical cores |
+| **Memory (RAM)** | 16 GB |
+| **Graphics Card (GPU)** | Dedicated GPU with a minimum of 4 GB VRAM |
+| **Available Storage** | Minimum 100 GB of free disk space |
+
+## Software Requirements
+
+- **Operating System:** A supported 64-bit operating system, such as Windows or Linux.
+- **Docker:** Docker Engine or Docker Desktop, depending on your operating system.
+- **Docker Compose:** Required to run the application services together.
+- **Internet Connection:** Required during initial setup to download Docker images and dependencies.
+
+## Why Are These Requirements Needed?
+
+- **CPU:** Handles application operations, database requests, media processing, and background tasks.
+- **RAM:** Provides enough memory to run multiple Docker containers and supporting services simultaneously.
+- **GPU:** Provides the graphics memory needed by the local AI image-tagging service. Compatible GPU hardware, drivers, and Docker GPU configuration are required for acceleration.
+- **Storage:** Provides room for Docker images, containers, application dependencies, temporary processing files, and logs.
+
+## Storage Recommendations
+
+The minimum 100 GB of free storage is intended for the application, Docker environment, and associated services.
+
+**Your photo and video library requires additional storage.** The amount needed depends on the size of your media collection and how much it grows over time.
+
+For larger libraries, consider using a separate storage drive dedicated to your photos and videos.
+
+## Important Notes
+
+- These specifications represent the recommended minimum for this project, not a guarantee of performance for every workload.
+- AI image-tagging performance depends on the GPU, available VRAM, model configuration, and image resolution.
+- A compatible NVIDIA GPU and correctly configured GPU support may be required for GPU acceleration with the current AI service.
+- Systems with more RAM, CPU cores, and storage may perform better when processing large media libraries or serving multiple users.
+- Ensure Docker has sufficient memory and disk space allocated to run all required services.
+
+## Pre-Installation Checklist
+
+Before proceeding with installation, verify that your system has:
+
+- [ ] Intel Core i7, 4th Generation or newer
+- [ ] At least 4 physical CPU cores
+- [ ] 16 GB RAM or more
+- [ ] A dedicated GPU with at least 4 GB VRAM
+- [ ] At least 100 GB of free disk space
+- [ ] A supported 64-bit operating system
+- [ ] Docker and Docker Compose installed
+
+Once your system meets these requirements, proceed to the installation guide to configure and run the Memories Server.

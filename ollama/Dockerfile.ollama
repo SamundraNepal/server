@@ -1,0 +1,10 @@
+
+FROM ollama/ollama:latest
+
+RUN (ollama serve &) && \
+    for i in $(seq 1 60); do \
+      ollama list >/dev/null 2>&1 && break; \
+      sleep 2; \
+    done && \
+    ollama pull minicpm-v4.6 && \
+    pkill ollama

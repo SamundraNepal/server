@@ -1,0 +1,77 @@
+services:
+  frontend:
+    build: ./frontend
+    env_file: ./frontend/.env
+    environment:
+      NEXT_PUBLIC_URL: "/api"
+      INTERNAL_API_URL: "http://nginx/api"
+      WATCHPACK_POLLING: "true"
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    command: npm run start
+
+  backend:
+    build: ./backend
+    env_file: ./backend/.env
+
+    environment:
+      STORAGE_PATH_LINUX: ${MEDIA_STORAGE_PATH}
+      STORAGE_PATH_WINDOWS: ${MEDIA_STORAGE_PATH}
+
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+      - type: bind
+        source: "${MEDIA_STORAGE_PATH}"
+        target: "${MEDIA_STORAGE_TARGET}"
+    command: npm run start
+
+  ollama:
+    build:
+      context: ./ollama
+      dockerfile: Dockerfile.ollama
+    image: media_server-ollama:latest
+    container_name: media_server-ollama
+    restart: unless-stopped
+    gpus: all
+    volumes:
+      - ollama_data:/root/.ollama
+    ports:
+      - "127.0.0.1:11434:11434"
+
+  ai-api:
+    build: ./ollama
+    image: media_server-ai-api:latest
+    container_name: media_server-ai-api
+    restart: unless-stopped
+    environment:
+      OLLAMA_URL: "http://ollama:11434"
+      OLLAMA_MODEL: "minicpm-v4.6"
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      - ollama
+
+  mongodb:
+    image: mongo:7.0.12
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  nginx:
+    build: ./nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+
+volumes:
+  ollama_data:
+  mongodb_data:
